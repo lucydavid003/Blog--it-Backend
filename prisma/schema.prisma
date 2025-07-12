@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid()) @map("id")
+  firstName    String   @map("first_name")
+  lastName     String   @map("last_name")
+  userName     String   @unique @map("user_name")
+  emailAddress String   @unique @map("email_address")
+  password     String   @map("password")
+  isDeleted    Boolean  @default(false)
+  dateJoined   DateTime @default(now()) @map("date_joined")
+  updatedAt    DateTime @default(now()) @map("updated_at")
+  blogs        Blog []
+
+  @@map("users")
+}
+
+model Blog {
+  id          String   @id @default(uuid()) @map("blog_id")
+  title       String  @map("title")
+  synopsis    String  @map("synopsis")
+  content     String   @map("content")
+  featuredImg String  @map("featured_image")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  isDeleted   Boolean  @default(false) @map("is_deleted")
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+
+
+  @@map("blogs")
+}
