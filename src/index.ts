@@ -30,7 +30,7 @@ app.get("/", (_req, res) => {
 app.use("/auth", authRouter);
 app.use("/blogs", blogsRouter);
 app.use("/users",userRouter)
-app.use('/api', uploadRouter);
+app.use('/', uploadRouter);
 
 
 const port = process.env.PORT || 4000;

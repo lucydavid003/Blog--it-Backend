@@ -1,6 +1,6 @@
 import cloudinary from '../utils/cloudinary';
 import { Request, Response } from 'express';
-import fs from 'fs';
+
 
 export const uploadImage = async (req: Request, res: Response): Promise<void> => {
   try {
