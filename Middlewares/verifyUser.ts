@@ -5,7 +5,7 @@ import { Userpayload } from "../types";
 function verifyUser(req: Request, res: Response, next: NextFunction) {
   const { authToken } = req.cookies;
   console.log(authToken)
-  // const authToken = req.headers['authorization']
+  
 
   if (!authToken) {
     res.status(401).json({ message: "Unauthorized.please login!" });

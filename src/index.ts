@@ -2,10 +2,11 @@ import express, { Express } from "express";
 
 import cors from "cors";
 
-import  CookieParser from "cookie-parser";
+
 import authRouter from "../Routes/auth.routes";
 import blogsRouter from "../Routes/blog.routes";
-import userRouter from "../Routes/user.routes"
+import userRouter from "../Routes/user.routes";
+import uploadRouter from "../Routes/upload.routes";
 
 import cookieParser from "cookie-parser";
 
@@ -29,7 +30,7 @@ app.get("/", (_req, res) => {
 app.use("/auth", authRouter);
 app.use("/blogs", blogsRouter);
 app.use("/users",userRouter)
-
+app.use('/api', uploadRouter);
 
 
 const port = process.env.PORT || 4000;

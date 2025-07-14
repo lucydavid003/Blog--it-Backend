@@ -1,10 +1,10 @@
 import { Request, Response,  } from "express";
-// import prisma from "../utils/prisma";
+
 import { PrismaClient } from "@prisma/client"
 import bcrypt from "bcryptjs";
 const client = new PrismaClient();
 
-// GET /api/user/me
+
 export const updateUserInfo = async (req: Request, res: Response): Promise<void> => {
   const userId = req.user?.id;
   const { firstName, lastName, userName, emailAddress } = req.body;
@@ -32,7 +32,7 @@ export const updateUserInfo = async (req: Request, res: Response): Promise<void>
 
 
 
-// PATCH /api/user/password
+
 export const updateUserPassword = async (req: Request, res: Response): Promise<void> => {
   const userId = req.user?.id;
   const { currentPassword, newPassword } = req.body;
