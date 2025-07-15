@@ -143,7 +143,14 @@ export const getAllBlogs = async (
       },
     });
 
-    res.status(200).json(blogs);
+    const updatedBlogs = blogs.map((blog) => ({
+      ...blog,
+      authorName: blog.author
+        ? `${blog.author.firstName ?? ""} ${blog.author.lastName ?? ""}`.trim()
+        : "Unknown Author",
+    }));
+
+    res.status(200).json(updatedBlogs);
   } catch (error) {
     console.error("Fetch Blogs Error:", error);
     res
@@ -156,9 +163,9 @@ export const getAllUserBlogs = async (
   res: Response
 ): Promise<void> => {
   try {
-    const user = req.user
-    console.log("loggedin user", user)
-    
+    const user = req.user;
+    console.log("loggedin user", user);
+
     const blogs = await client.blog.findMany({
       where: { isDeleted: false, authorId: user.id },
       include: {
